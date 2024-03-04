@@ -3,7 +3,7 @@ import { Link, NavLink } from 'react-router-dom'
 import img from '../assets/download.png'
 
 const Header = () => {
-    const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('login'));
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
   return (
     <div className="p-7 py-5 flex justify-between items-center shadow-lg ">
       <img className="h-16" src={img} alt="YumBites" />
@@ -20,7 +20,7 @@ const Header = () => {
       </ul>
 
       <div>
-        <NavLink to="/profile/account" className="text-sky-700 font-semibold mr-4">Hello, {(isLoggedIn) ? user?.name : 'user'}</NavLink>
+        <NavLink to="/profile/account" className="text-sky-700 font-semibold mr-4">Hello, {'user'}</NavLink>
         {isLoggedIn ? (
           <button
             className="px-5 py-2.5 font-medium bg-blue-50 hover:bg-blue-100 hover:text-blue-600 text-blue-500 rounded-lg text-sm"

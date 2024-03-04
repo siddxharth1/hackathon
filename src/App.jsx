@@ -4,6 +4,9 @@ import HomePage from './components/HomePage';
 import Error from './components/Error';
 import PreviousYearPaper from './components/PreviousYearPaper';
 import Notes from './components/Notes';
+import TeePaper from './components/TeePaper';
+import Login from './components/Login';
+import Signup from './components/Signup';
 
 function App() {
 
@@ -23,10 +26,28 @@ function App() {
         },
         {
           path: "/pyp",
-          element: <PreviousYearPaper/>
+          element: <PreviousYearPaper/>,
+          children:[
+            {
+              path: "mid",
+              element: <TeePaper/>
+            },
+            {
+              path: "tee",
+              element: <TeePaper/>
+            }
+          ]
         }
       ],
-    }
+    },
+    {
+      path: "/login",
+      element: <Login/>
+    },
+    {
+      path: "/signup",
+      element: <Signup/>
+    },
   ])
 
   return (

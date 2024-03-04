@@ -1,45 +1,47 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const courses = [
   {
     courseCode: "CSA2001",
-    Name: "Fundamental in AI and ML"
+    Name: "Fundamental in AI and ML",
   },
   {
     courseCode: "MAT1001",
-    Name: "Calculas and laplace"
+    Name: "Calculas and laplace",
   },
   {
     courseCode: "CSE2001",
-    Name: "Object Oriented Programming With C++"
+    Name: "Object Oriented Programming With C++",
   },
   {
     courseCode: "CSE2002",
-    Name: "Data Structures and Algorithms"
+    Name: "Data Structures and Algorithms",
   },
   {
     courseCode: "CSE2003",
-    Name: "Computer Architecture and Organization"
+    Name: "Computer Architecture and Organization",
   },
   {
     courseCode: "CSE3001",
-    Name: "Database Management Systems"
-  }
-]
+    Name: "Database Management Systems",
+  },
+];
 
 const Section = ({ title, desc, isVisible, setIsVisible }) => {
   return (
-    <div className="border border-black m-2 p-2">
-      <h3 className="text-xl font-bold">{title}</h3>
-      
-        <button className="bg-blue-200" 
-        onClick={()=>{setIsVisible(!isVisible)}}
-        >
-         {isVisible ?  "Hide" : "Show"}
-        </button>
-      
-      {isVisible && <p>{desc}</p>}
+    <div className="border border-black m-2 p-2 rounded-md">
+      <h3 className="text-xl font-bold mb-2">{title[0] +": " +title[1]}</h3>
+      <button
+        className="bg-blue-200 rounded-md p-1"
+        onClick={() => {
+          setIsVisible(!isVisible);
+        }}
+      >
+        {isVisible ? "Hide" : "Show"}
+      </button>
+
+      {isVisible && <div className="flex gap-5"><Link to={"tee/"+  title[0]}>{desc[0]}</Link>  <Link to={"mid/" + title[0]}>{desc[1]}</Link>  </div> }
     </div>
   );
 };
@@ -48,17 +50,21 @@ const PreviousYearPaper = () => {
   const [visibleSection, setIsVisibleSection] = useState(null);
   return (
     <>
-      <h1 className='font-bold text-2xl m-3'>Previous Year Paper</h1>
-      <Section
-        title={"About Instamart"}
-        desc={
-          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
-        }
-        isVisible={visibleSection === "about"}
-        setIsVisible={()=>setIsVisibleSection((visibleSection !== "about") ? "about" : null)}
-      />
+      <h1 className="font-bold text-2xl m-3">Previous Year Paper</h1>
+      {courses.map((item) => {
+        return (
+          <Section
+            title={ [item.courseCode, item.Name]}
+            desc={["Term End", "Mid Term"]}
+            isVisible={visibleSection === item.courseCode}
+            setIsVisible={() =>
+              setIsVisibleSection(visibleSection !== item.courseCode ? item.courseCode : null)
+            }
+          />
+        );
+      })}
     </>
   );
-}
+};
 
-export default PreviousYearPaper
+export default PreviousYearPaper;
